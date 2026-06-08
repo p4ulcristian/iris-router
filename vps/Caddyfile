@@ -12,15 +12,21 @@
 }
 
 (protected) {
-	forward_auth 10.99.0.2:1411 {
-		uri /api/verify-token
-		copy_headers Remote-User Remote-Email Remote-Name Remote-Groups
+	forward_auth 10.99.0.2:4180 {
+		uri /oauth2/auth
+		copy_headers X-Auth-Request-User X-Auth-Request-Email X-Auth-Request-Groups
+		header_up X-Real-IP {remote_host}
 	}
 }
 
 # Auth portal — must be public, no forward_auth here
 auth.irisdoes.work {
 	reverse_proxy 10.99.0.2:1411
+}
+
+# oauth2-proxy callback endpoint — must be public
+oauth2.irisdoes.work {
+	reverse_proxy 10.99.0.2:4180
 }
 
 irisdoes.work {
