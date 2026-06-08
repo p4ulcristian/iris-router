@@ -1,3 +1,4 @@
 # Never commit real secrets
 iris/*.env.local
 *.secret
+data/
