@@ -1,0 +1,120 @@
+{
+	email p4ulcristian@gmail.com
+	acme_dns cloudflare {env.CLOUDFLARE_API_TOKEN}
+}
+
+(fallback) {
+	handle_errors 502 503 504 {
+		root * /etc/caddy/fallback
+		rewrite * /index.html
+		file_server
+	}
+}
+
+(protected) {
+	forward_auth 10.99.0.2:1411 {
+		uri /api/verify-token
+		copy_headers Remote-User Remote-Email Remote-Name Remote-Groups
+	}
+}
+
+# Auth portal — must be public, no forward_auth here
+auth.irisdoes.work {
+	reverse_proxy 10.99.0.2:1411
+}
+
+irisdoes.work {
+	encode zstd gzip
+	import protected
+	reverse_proxy 10.99.0.2:8080
+	import fallback
+}
+
+beta.irisdoes.work {
+	encode zstd gzip
+	import protected
+	reverse_proxy 10.99.0.2:8081
+	import fallback
+}
+
+iris-os-shadow.irisdoes.work {
+	import protected
+	reverse_proxy 10.99.0.2:9630
+	import fallback
+}
+
+iris-os-beta-shadow.irisdoes.work {
+	import protected
+	reverse_proxy 10.99.0.2:9631
+	import fallback
+}
+
+iris-stt.irisdoes.work {
+	import protected
+	reverse_proxy 10.99.0.2:4260
+	import fallback
+}
+
+manas.irisdoes.work {
+	encode zstd gzip
+	import protected
+	reverse_proxy 10.99.0.2:8090
+	import fallback
+}
+
+manas-shadow.irisdoes.work {
+	import protected
+	reverse_proxy 10.99.0.2:9642
+	import fallback
+}
+
+ironrainbow.irisdoes.work {
+	encode zstd gzip
+	import protected
+	reverse_proxy 10.99.0.2:4000
+	import fallback
+}
+
+ironrainbow-shadow.irisdoes.work {
+	import protected
+	reverse_proxy 10.99.0.2:9110
+	import fallback
+}
+
+iris-tts.irisdoes.work {
+	import protected
+	reverse_proxy 10.99.0.3:4261
+	import fallback
+}
+
+torrent.irisdoes.work {
+	encode zstd gzip
+	import protected
+	reverse_proxy 10.99.0.2:9091
+	import fallback
+}
+
+media.irisdoes.work {
+	encode zstd gzip
+	import protected
+	reverse_proxy 10.99.0.2:8096
+	import fallback
+}
+
+code.irisdoes.work {
+	encode zstd gzip
+	import protected
+	reverse_proxy 10.99.0.2:8443
+	import fallback
+}
+
+*.irisdoes.work {
+	handle {
+		error 404
+	}
+	handle_errors {
+		root * /etc/caddy/fallback
+		rewrite * /index.html
+		file_server
+	}
+}
