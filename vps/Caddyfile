@@ -67,13 +67,11 @@ iris-stt.irisdoes.work {
 
 manas.irisdoes.work {
 	encode zstd gzip
-	import protected
 	reverse_proxy 10.99.0.2:8090
 	import fallback
 }
 
 manas-shadow.irisdoes.work {
-	import protected
 	reverse_proxy 10.99.0.2:9642
 	import fallback
 }
@@ -85,7 +83,6 @@ ironrainbow.irisdoes.work {
 }
 
 ironrainbow-shadow.irisdoes.work {
-	import protected
 	reverse_proxy 10.99.0.2:9110
 	import fallback
 }
