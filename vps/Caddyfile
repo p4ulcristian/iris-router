@@ -80,7 +80,6 @@ manas-shadow.irisdoes.work {
 
 ironrainbow.irisdoes.work {
 	encode zstd gzip
-	import protected
 	reverse_proxy 10.99.0.2:4000
 	import fallback
 }
@@ -106,7 +105,6 @@ torrent.irisdoes.work {
 
 media.irisdoes.work {
 	encode zstd gzip
-	import protected
 	reverse_proxy 10.99.0.2:8096
 	import fallback
 }
