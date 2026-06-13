@@ -102,6 +102,12 @@ torrent.irisdoes.work {
 
 media.irisdoes.work {
 	encode zstd gzip
+	reverse_proxy 10.99.0.2:5055
+	import fallback
+}
+
+cinema.irisdoes.work {
+	encode zstd gzip
 	reverse_proxy 10.99.0.2:8096
 	import fallback
 }
@@ -117,6 +123,13 @@ claudia.irisdoes.work {
 	encode zstd gzip
 	import protected
 	reverse_proxy 10.99.0.2:3000
+	import fallback
+}
+
+git.irisdoes.work {
+	encode zstd gzip
+	import protected
+	reverse_proxy 10.99.0.2:4300
 	import fallback
 }
 
