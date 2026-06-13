@@ -96,7 +96,7 @@ iris-tts.irisdoes.work {
 torrent.irisdoes.work {
 	encode zstd gzip
 	import protected
-	reverse_proxy 10.99.0.2:9091
+	reverse_proxy 10.99.0.2:8085
 	import fallback
 }
 
@@ -110,6 +110,13 @@ code.irisdoes.work {
 	encode zstd gzip
 	import protected
 	reverse_proxy 10.99.0.2:8443
+	import fallback
+}
+
+claudia.irisdoes.work {
+	encode zstd gzip
+	import protected
+	reverse_proxy 10.99.0.2:3000
 	import fallback
 }
 
