@@ -133,6 +133,25 @@ git.irisdoes.work {
 	import fallback
 }
 
+vitals.irisdoes.work {
+	encode zstd gzip
+	import protected
+	reverse_proxy 10.99.0.2:4400
+	import fallback
+}
+
+eye-on-rainbow.irisdoes.work {
+	encode zstd gzip
+	import protected
+	reverse_proxy 10.99.0.2:4010
+	import fallback
+}
+
+eye-on-rainbow-shadow.irisdoes.work {
+	reverse_proxy 10.99.0.2:9210
+	import fallback
+}
+
 *.irisdoes.work {
 	handle {
 		error 404
