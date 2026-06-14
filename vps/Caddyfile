@@ -142,6 +142,7 @@ vitals.irisdoes.work {
 
 eye-on-rainbow.irisdoes.work {
 	encode zstd gzip
+	import protected
 	reverse_proxy 10.99.0.2:4010
 	import fallback
 }
